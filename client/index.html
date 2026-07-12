@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackwater & Co. Vintage Bookstore — Ledger & Storefront</title>
+  <meta name="description" content="Atmospheric, RDR2-inspired boutique vintage bookstore storefront and discrete variation catalog requisition ledger.">
+  
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/rdr2-ledger.css">
+</head>
+<body>
+
+  <!-- Mercantile Header & Banner -->
+  <header class="mercantile-header">
+    <div class="container header-inner">
+      <div class="brand-section">
+        <div class="brand-title">
+          <span>❖</span> BLACKWATER & CO. <span>❖</span>
+        </div>
+        <div class="brand-subtitle">Est. 1899 — Rare Volumes, Chronicles & Frontier Ledger</div>
+      </div>
+      
+      <nav class="nav-actions">
+        <a href="/" class="nav-link active">
+          <span>📖</span> Storefront Catalog
+        </a>
+        <a href="/admin" class="nav-link">
+          <span>⚖️</span> Admin Portal CMS 
+          <span id="header-pending-badge" class="badge-counter" style="display: none;">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Global Discrete Variation Search Bar -->
+    <section class="search-banner fade-in">
+      <h2 style="margin-bottom: 0.5rem;">Query the Ledger & Requisition Catalog</h2>
+      <p class="sub-header">Search our current stock of rare editions or file a requisition for volumes not yet cataloged.</p>
+      
+      <form id="search-form" class="search-form" onsubmit="return false;">
+        <div class="search-input-wrapper">
+          <input 
+            type="text" 
+            id="search-input" 
+            class="search-input" 
+            placeholder="Search by Title or Author... (e.g. 'The Godfather', 'Blood Meridian', or file a new query)" 
+            autocomplete="off"
+            required
+          />
+        </div>
+        <button type="submit" class="btn-western btn-gold" id="search-submit-btn">
+          <span>🔍</span> Query Ledger
+        </button>
+      </form>
+    </section>
+
+    <!-- Category Filter Tabs -->
+    <nav id="filter-tabs" class="filter-tabs fade-in">
+      <button class="tab-btn active" data-genre="All Volumes">All Volumes</button>
+      <button class="tab-btn" data-genre="Western & Frontier">Western & Frontier</button>
+      <button class="tab-btn" data-genre="Crime & Syndicate">Crime & Syndicate</button>
+      <button class="tab-btn" data-genre="High Fantasy">High Fantasy & Chronicles</button>
+      <button class="tab-btn" data-genre="Classic Adventure">Classic Adventure</button>
+      <button class="tab-btn" data-genre="Classic Drama">Classic Drama</button>
+    </nav>
+
+    <!-- Catalog Gallery Grid -->
+    <section id="catalog-grid" class="catalog-grid fade-in">
+      <!-- Dynamically populated by Catalog.js -->
+      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--accent-lavender);">
+        Opening the vault ledgers...
+      </div>
+    </section>
+  </main>
+
+  <!-- Two-Page Leather-Bound Ledger Reading Modal -->
+  <div id="ledger-modal" class="modal-overlay">
+    <div class="ledger-book">
+      <button id="close-ledger-btn" class="modal-close" title="Close Ledger">✕</button>
+      
+      <!-- Left Page: Cover & Metadata -->
+      <div class="ledger-page left-page">
+        <div class="ledger-left-header">
+          <span>BLACKWATER LEDGER ARCHIVE</span>
+          <span id="ledger-cat-id">#CAT-1899-000</span>
+        </div>
+        
+        <img id="ledger-cover" src="" alt="Book Cover" class="ledger-cover-img" />
+        
+        <div id="ledger-stamp-box">
+          <span id="ledger-stamp" class="ledger-rubber-stamp">IN STOCK</span>
+        </div>
+
+        <table class="ledger-meta-table">
+          <tr>
+            <td class="ledger-meta-label">Author:</td>
+            <td id="ledger-author" class="ledger-meta-value">—</td>
+          </tr>
+          <tr>
+            <td class="ledger-meta-label">Genre:</td>
+            <td id="ledger-genre" class="ledger-meta-value">—</td>
+          </tr>
+          <tr>
+            <td class="ledger-meta-label">Price:</td>
+            <td id="ledger-price" class="ledger-meta-value" style="color: var(--stamp-crimson); font-weight: bold;">—</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Right Page: Title & Excerpt -->
+      <div class="ledger-page right-page">
+        <h2 id="ledger-title" class="ledger-right-title">—</h2>
+        <div id="ledger-sub-author" class="ledger-right-author">—</div>
+        
+        <div id="ledger-excerpt" class="ledger-excerpt">
+          <!-- Excerpt inserted dynamically with drop caps -->
+        </div>
+        
+        <div style="border-top: 1px dashed var(--ledger-ink); padding-top: 1.5rem; margin-top: 2rem;">
+          <h4 style="font-family: var(--font-header-western); font-size: 0.9rem; color: var(--stamp-crimson); margin-bottom: 0.5rem;">PROPRIETOR'S CATALOG NOTE:</h4>
+          <p id="ledger-description" style="font-size: 1.05rem; line-height: 1.6; color: var(--ledger-ink-light);"></p>
+        </div>
+
+        <div style="margin-top: 2.5rem; display: flex; justify-content: flex-end; gap: 1rem;">
+          <button class="btn-western btn-crimson" id="ledger-close-footer-btn">Return to Storefront</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Discrete Variation Miss Requisition Telegram Modal -->
+  <div id="miss-modal" class="modal-overlay">
+    <div class="telegram-card">
+      <button id="close-miss-btn" class="modal-close" title="Close Notice">✕</button>
+      
+      <div class="telegram-header">
+        <span>❖ BLACKWATER TELEGRAM & REQUISITION SERVICE ❖</span>
+        <span>FORM #REQ-DV-1899</span>
+      </div>
+
+      <h3 class="telegram-stamp-notice">ITEM NOT CURRENTLY IN STOCK, BUT AVAILABLE SOON</h3>
+      
+      <div class="telegram-query-display" id="miss-query-text">
+        "Exact User Query String"
+      </div>
+
+      <p class="telegram-body">
+        We have dispatched an immediate catalog requisition to our proprietors regarding this specific volume. Your query has been recorded into our <strong>Discrete Variation Ledger</strong>.
+      </p>
+
+      <p style="font-family: var(--font-mono-ledger); font-size: 0.95rem; color: var(--ledger-ink-light); margin-bottom: 2rem;">
+        Requisition Filed at <span id="miss-timestamp">1899-10-14</span> — Status: <strong style="color: var(--stamp-crimson);">PENDING PROPRIETOR REVIEW</strong>
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 1.2rem;">
+        <button id="miss-acknowledge-btn" class="btn-western btn-gold">
+          <span>📜</span> Acknowledge Requisition & Return
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real-time Telegram Toast Container (for live search notifications) -->
+  <div id="toast-container" class="notification-toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/api.js"></script>
+  <script src="js/components/Navbar.js"></script>
+  <script src="js/components/Catalog.js"></script>
+  <script src="js/components/LedgerModal.js"></script>
+  <script src="js/components/MissModal.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

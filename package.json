@@ -1,0 +1,29 @@
+{
+  "name": "blackwater-vintage-books",
+  "version": "1.0.0",
+  "description": "Boutique vintage bookstore web application with RDR2-styled ledger UI, full CRUD Admin Portal, and Discrete Variation search query logging.",
+  "main": "server/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "seed": "node server/database/seed.js"
+  },
+  "keywords": [
+    "vintage",
+    "bookstore",
+    "ledger",
+    "rdr2",
+    "discrete-variation"
+  ],
+  "author": "Antigravity Systems Architect",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "sql.js": "^1.12.0"
+  },
+  "optionalDependencies": {
+    "better-sqlite3": "^11.6.0"
+  }
+}
