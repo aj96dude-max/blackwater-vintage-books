@@ -1,0 +1,584 @@
+/* ==========================================================================
+   RDR2-Inspired Vintage Bookstore & Ledger UI Styling
+   ========================================================================== */
+
+/* Header & Banner */
+.mercantile-header {
+  background: linear-gradient(180deg, rgba(28, 21, 42, 0.95) 0%, rgba(46, 35, 78, 0.9) 100%);
+  border-bottom: 3px solid var(--gold-antique);
+  box-shadow: 0 8px 30px rgba(18, 13, 30, 0.8);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(16px);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.brand-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 2.2rem;
+  line-height: 1.1;
+  color: var(--gold-highlight);
+  text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-subtitle {
+  font-family: var(--font-mono-ledger);
+  font-size: 0.85rem;
+  color: var(--accent-lavender);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+/* Nav links & Badges */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  font-family: var(--font-header-western);
+  font-size: 0.95rem;
+  color: var(--accent-lavender-light);
+  text-decoration: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--gold-highlight);
+  border-color: var(--border-gold);
+  background: rgba(184, 169, 223, 0.1);
+}
+
+.badge-counter {
+  background: var(--stamp-crimson);
+  color: #fff;
+  font-family: var(--font-mono-ledger);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* Global Discrete Variation Search Bar */
+.search-banner {
+  margin: 2.5rem 0 2rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, rgba(59, 47, 95, 0.85) 0%, rgba(40, 31, 68, 0.9) 100%);
+  border: 2px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-ledger);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-banner::before {
+  content: "CATALOG REQUISITION & LEDGER INQUIRY";
+  position: absolute;
+  top: 0.6rem;
+  right: 1.5rem;
+  font-family: var(--font-mono-ledger);
+  font-size: 0.75rem;
+  color: rgba(199, 161, 74, 0.5);
+  letter-spacing: 3px;
+}
+
+.search-form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.search-input-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background: var(--ledger-paper);
+  border: 2px solid var(--gold-antique);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.5rem;
+  font-family: var(--font-body-vintage);
+  font-size: 1.25rem;
+  color: var(--ledger-ink);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-periwinkle-bright);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1), 0 0 15px rgba(174, 194, 255, 0.5);
+}
+
+.search-input::placeholder {
+  color: rgba(42, 36, 33, 0.5);
+  font-style: italic;
+}
+
+/* Category Filter Tabs */
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(199, 161, 74, 0.25);
+  padding-bottom: 1.2rem;
+}
+
+.tab-btn {
+  background: rgba(46, 35, 78, 0.6);
+  color: var(--accent-lavender);
+  border: 1px solid rgba(184, 169, 223, 0.25);
+  font-family: var(--font-header-western);
+  font-size: 0.85rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.25s ease;
+}
+
+.tab-btn:hover, .tab-btn.active {
+  background: var(--gold-antique);
+  color: var(--ledger-ink);
+  border-color: var(--gold-highlight);
+  box-shadow: 0 4px 12px rgba(199, 161, 74, 0.4);
+  transform: translateY(-2px);
+}
+
+/* Catalog Gallery Grid */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2.5rem;
+  margin-bottom: 4rem;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border: 2px solid rgba(199, 161, 74, 0.35);
+  background: var(--bg-card-violet);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.book-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--gold-highlight);
+  box-shadow: 0 20px 45px rgba(15, 11, 26, 0.9), 0 0 25px rgba(199, 161, 74, 0.3);
+}
+
+.book-cover-container {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  background: #1C152A;
+  border-bottom: 2px solid var(--border-gold);
+}
+
+.book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.book-card:hover .book-cover {
+  transform: scale(1.06);
+}
+
+.genre-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(28, 21, 42, 0.9);
+  color: var(--gold-highlight);
+  border: 1px solid var(--border-gold);
+  font-family: var(--font-mono-ledger);
+  font-size: 0.72rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 1px;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.stock-stamp-card {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: var(--stamp-crimson);
+  color: #fff;
+  font-family: var(--font-header-western);
+  font-size: 0.7rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px dashed #FFB6B6;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 2;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+
+.stock-stamp-card.in-stock {
+  background: #2D6B3F;
+  border-color: #A3E0B5;
+}
+
+.book-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  background: linear-gradient(180deg, rgba(46, 35, 78, 0.95) 0%, rgba(35, 27, 61, 0.98) 100%);
+}
+
+.book-card-title {
+  font-family: var(--font-header-western);
+  font-size: 1.25rem;
+  color: var(--ledger-paper);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.book-card-author {
+  font-family: var(--font-header-display);
+  font-style: italic;
+  color: var(--accent-lavender);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.book-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(184, 169, 223, 0.2);
+  padding-top: 0.8rem;
+  margin-top: auto;
+}
+
+.book-price {
+  font-family: var(--font-mono-ledger);
+  font-size: 1.15rem;
+  color: var(--gold-highlight);
+  font-weight: bold;
+}
+
+.ledger-prompt {
+  font-family: var(--font-header-western);
+  font-size: 0.78rem;
+  color: var(--accent-periwinkle);
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Two-Page Leather-Bound Ledger Reading Modal
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(14, 10, 24, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 1.5rem;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ledger-book {
+  width: 100%;
+  max-width: 1150px;
+  max-height: 90vh;
+  background: var(--ledger-leather);
+  border: 14px solid var(--ledger-leather);
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95), inset 0 0 20px rgba(0,0,0,0.8);
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.35s ease;
+}
+
+/* Close Modal Button */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  background: var(--stamp-crimson);
+  color: #fff;
+  border: 2px solid var(--gold-antique);
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-family: var(--font-header-western);
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.modal-close:hover {
+  background: #B83333;
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 0 15px rgba(217, 104, 104, 0.8);
+}
+
+.ledger-page {
+  flex: 1;
+  background: var(--ledger-paper);
+  color: var(--ledger-ink);
+  padding: 3rem 2.8rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Aged Parchment texture */
+.ledger-page::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(rgba(180, 160, 130, 0.08) 2px, transparent 0);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+/* Page Dividers / Central Binding Spine */
+.ledger-page.left-page {
+  border-right: 1px solid #C4B69E;
+  box-shadow: inset -18px 0 25px -12px rgba(42, 36, 33, 0.25);
+}
+
+.ledger-page.right-page {
+  border-left: 1px solid #D1C5AD;
+  box-shadow: inset 18px 0 25px -12px rgba(42, 36, 33, 0.25);
+}
+
+/* Left Page: Cover & Metadata */
+.ledger-left-header {
+  font-family: var(--font-mono-ledger);
+  font-size: 0.85rem;
+  color: var(--ledger-ink-light);
+  border-bottom: 2px double var(--ledger-ink);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ledger-cover-img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border: 3px solid var(--ledger-ink);
+  box-shadow: 8px 10px 20px rgba(0,0,0,0.3);
+  margin-bottom: 1.5rem;
+}
+
+.ledger-meta-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: var(--font-body-vintage);
+}
+
+.ledger-meta-table td {
+  padding: 0.6rem 0;
+  border-bottom: 1px dotted rgba(42, 36, 33, 0.3);
+}
+
+.ledger-meta-label {
+  font-family: var(--font-mono-ledger);
+  font-weight: bold;
+  color: var(--ledger-ink-light);
+  width: 35%;
+}
+
+.ledger-meta-value {
+  font-size: 1.15rem;
+  color: var(--ledger-ink);
+  font-weight: 600;
+}
+
+/* Right Page: Title & Reading Excerpt */
+.ledger-right-title {
+  font-family: var(--font-header-western);
+  font-size: 2rem;
+  color: var(--ledger-ink);
+  line-height: 1.2;
+  margin-bottom: 0.3rem;
+}
+
+.ledger-right-author {
+  font-family: var(--font-header-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--ledger-ink-light);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--gold-antique);
+  padding-bottom: 0.8rem;
+}
+
+/* Drop Caps for authentic 19th-century reading experience */
+.ledger-excerpt {
+  font-family: var(--font-body-vintage);
+  font-size: 1.22rem;
+  line-height: 1.8;
+  color: var(--ledger-ink);
+  text-align: justify;
+  margin-bottom: 2rem;
+}
+
+.ledger-excerpt::first-letter {
+  font-family: var(--font-header-western);
+  font-size: 4rem;
+  float: left;
+  margin-right: 12px;
+  line-height: 0.85;
+  color: var(--stamp-crimson);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Realistic Rubber Stamp inside Ledger */
+.ledger-rubber-stamp {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border: 4px double var(--stamp-crimson);
+  color: var(--stamp-crimson);
+  font-family: var(--font-header-western);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-4deg);
+  border-radius: 4px;
+  margin: 1.5rem 0;
+  background: rgba(139, 38, 38, 0.04);
+  box-shadow: inset 0 0 6px rgba(139, 38, 38, 0.2);
+  animation: stampDown 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+}
+
+/* ==========================================================================
+   Discrete Variation Miss Requisition Telegram Modal
+   ========================================================================== */
+.telegram-card {
+  background: var(--ledger-paper);
+  color: var(--ledger-ink);
+  border: 10px solid var(--ledger-leather);
+  border-radius: var(--radius-md);
+  max-width: 650px;
+  width: 90%;
+  padding: 2.8rem;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.9);
+  position: relative;
+  text-align: center;
+  border-image: repeating-linear-gradient(45deg, var(--stamp-crimson), var(--stamp-crimson) 10px, var(--ledger-paper) 10px, var(--ledger-paper) 20px) 10;
+}
+
+.telegram-header {
+  font-family: var(--font-mono-ledger);
+  font-size: 0.95rem;
+  letter-spacing: 3px;
+  color: var(--ledger-ink-light);
+  border-bottom: 2px solid var(--ledger-ink);
+  padding-bottom: 0.8rem;
+  margin-bottom: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.telegram-stamp-notice {
+  font-family: var(--font-header-western);
+  font-size: 1.7rem;
+  color: var(--stamp-crimson);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.telegram-query-display {
+  font-family: var(--font-mono-ledger);
+  font-size: 1.4rem;
+  background: #E5DCCA;
+  padding: 1rem 1.5rem;
+  border-left: 5px solid var(--stamp-crimson);
+  margin: 1.5rem 0;
+  color: var(--ledger-ink);
+  word-break: break-word;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.telegram-body {
+  font-family: var(--font-body-vintage);
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--ledger-ink);
+  margin-bottom: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .ledger-book {
+    flex-direction: column;
+    max-height: 85vh;
+  }
+  .ledger-page.left-page, .ledger-page.right-page {
+    border: none;
+    box-shadow: none;
+    padding: 1.8rem;
+  }
+  .header-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}

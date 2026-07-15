@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blackwater & Co. — Proprietor's CMS & Discrete Variation Ledger</title>
+  <meta name="description" content="Secure Admin Portal for managing rare volume inventory and monitoring user-driven discrete variation search logs.">
+  
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/rdr2-ledger.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- Mercantile Header -->
+  <header class="mercantile-header">
+    <div class="container header-inner">
+      <div class="brand-section">
+        <div class="brand-title">
+          <span>❖</span> BLACKWATER & CO. <span>❖</span>
+        </div>
+        <div class="brand-subtitle">Proprietor's CMS & Discrete Variation Requisition Portal</div>
+      </div>
+      
+      <nav class="nav-actions">
+        <a href="/" class="nav-link">
+          <span>📖</span> Storefront Catalog
+        </a>
+        <a href="/admin" class="nav-link active">
+          <span>⚖️</span> Admin Portal CMS
+          <span id="header-pending-badge" class="badge-counter" style="display: none;">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-container">
+    <div class="admin-header-banner fade-in">
+      <div class="admin-title-box">
+        <h1>Proprietor's Management Deck</h1>
+        <p>Manage volume catalog CRUD operations and fulfill user search requisitions recorded in the discrete variation ledger.</p>
+      </div>
+      
+      <div class="admin-tabs">
+        <button id="tab-inventory-btn" class="admin-tab-btn active" onclick="switchAdminTab('inventory')">
+          <span>📚</span> Catalog Inventory (CRUD)
+        </button>
+        <button id="tab-logs-btn" class="admin-tab-btn" onclick="switchAdminTab('logs')">
+          <span>🔔</span> Discrete Variation Search Logs
+          <span id="tab-logs-counter" class="badge-counter" style="margin-left: 6px;">0</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Section 1: Inventory Management (CRUD) -->
+    <section id="section-inventory" class="admin-section active fade-in">
+      <div class="cms-panel">
+        <div class="panel-header">
+          <h2>Active Catalog Inventory</h2>
+          <button class="btn-western btn-gold" onclick="openCreateBookModal()">
+            <span>➕</span> Add New Volume
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="vintage-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cover</th>
+                <th>Title & Author</th>
+                <th>Genre</th>
+                <th>Price</th>
+                <th>Stock Status</th>
+                <th style="text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-tbody">
+              <!-- Populated dynamically by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Discrete Variation Search Logs -->
+    <section id="section-logs" class="admin-section fade-in">
+      <div class="cms-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Discrete Variation Search Requisitions</h2>
+            <p style="font-size: 0.95rem; color: var(--accent-lavender); margin-top: 0.2rem;">
+              Whenever a user queries a missing book on the storefront, the discrete string and request count are automatically logged below.
+            </p>
+          </div>
+          <button class="btn-western" onclick="loadSearchLogs()">
+            <span>🔄</span> Refresh Ledger
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="vintage-table">
+            <thead>
+              <tr>
+                <th>Query String (Discrete Variation)</th>
+                <th>Request Count</th>
+                <th>Last Searched</th>
+                <th>Status</th>
+                <th style="text-align: right;">Proprietor Fulfillment Workflow</th>
+              </tr>
+            </thead>
+            <tbody id="search-logs-tbody">
+              <!-- Populated dynamically by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CRUD Form Modal (Add / Edit Book) -->
+  <div id="admin-form-modal" class="admin-form-modal">
+    <div class="form-ledger-card">
+      <div class="form-ledger-header">
+        <span id="form-modal-title">ADD NEW CATALOG VOLUME</span>
+        <button class="modal-close" onclick="closeAdminFormModal()">✕</button>
+      </div>
+
+      <form id="book-form" onsubmit="handleBookFormSubmit(event)">
+        <input type="hidden" id="form-book-id" value="" />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="form-title">Volume Title *</label>
+            <input type="text" id="form-title" class="form-input" required placeholder="e.g. Neuromancer" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-author">Author *</label>
+            <input type="text" id="form-author" class="form-input" required placeholder="e.g. William Gibson" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-genre">Genre *</label>
+            <select id="form-genre" class="form-select" required>
+              <option value="Western & Frontier">Western & Frontier</option>
+              <option value="Crime & Syndicate">Crime & Syndicate</option>
+              <option value="High Fantasy">High Fantasy & Chronicles</option>
+              <option value="Classic Adventure">Classic Adventure</option>
+              <option value="Classic Drama">Classic Drama</option>
+              <option value="Frontier Sci-Fi">Frontier Sci-Fi</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-price">Price ($) *</label>
+            <input type="number" step="0.50" id="form-price" class="form-input" value="14.50" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-stock">Stock Status *</label>
+            <select id="form-stock" class="form-select" required>
+              <option value="In Stock">In Stock</option>
+              <option value="Out of Stock">Out of Stock</option>
+              <option value="Reserved">Reserved</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-cover">Cover Image URL</label>
+            <input type="url" id="form-cover" class="form-input" placeholder="https://images.unsplash.com/..." />
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="form-desc">Proprietor's Catalog Description</label>
+            <textarea id="form-desc" class="form-textarea" placeholder="Detailed synopsis and historical note for the ledger..."></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="form-excerpt">Ledger Reading Excerpt (First Chapter)</label>
+            <textarea id="form-excerpt" class="form-textarea" style="min-height: 120px;" placeholder="Sample text for the reader. The first letter will automatically become a decorative western drop cap!"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-western" onclick="closeAdminFormModal()">Cancel</button>
+          <button type="submit" class="btn-western btn-gold" id="form-submit-btn">
+            <span>💾</span> Save Volume to Catalog
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Real-time Telegram Toast Container -->
+  <div id="toast-container" class="notification-toast-container"></div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
+

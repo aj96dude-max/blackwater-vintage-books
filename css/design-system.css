@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Rye&family=Special+Elite&display=swap');
+
+:root {
+  /* Hopeful Violet-Blue Palette */
+  --bg-dark-violet: #251D3D;
+  --bg-mid-violet: #3B2F5F;
+  --bg-bright-violet: #4A3B7A;
+  --bg-surface-violet: rgba(59, 47, 95, 0.65);
+  --bg-card-violet: rgba(46, 35, 78, 0.85);
+  
+  /* Lavender & Periwinkle Accents */
+  --accent-lavender: #B8A9DF;
+  --accent-lavender-light: #D4CBEA;
+  --accent-periwinkle: #8DA4E2;
+  --accent-periwinkle-bright: #AEC2FF;
+  --accent-glow: rgba(141, 164, 226, 0.35);
+
+  /* Vintage Ledger Paper & Ink Palette */
+  --ledger-paper: #F6F2E8;
+  --ledger-paper-aged: #EDE5D3;
+  --ledger-paper-dark: #DFD5BE;
+  --ledger-ink: #2A2421;
+  --ledger-ink-light: #4A403A;
+  --ledger-leather: #1C152A;
+
+  /* RDR2 Stamps & Gold Accents */
+  --stamp-crimson: #8B2626;
+  --stamp-crimson-bg: rgba(139, 38, 38, 0.12);
+  --gold-antique: #C7A14A;
+  --gold-highlight: #E8D08B;
+  --border-gold: rgba(199, 161, 74, 0.4);
+
+  /* Typography */
+  --font-header-western: 'Rye', 'Alfa Slab One', serif;
+  --font-header-display: 'Playfair Display', serif;
+  --font-body-vintage: 'Crimson Text', serif;
+  --font-mono-ledger: 'Special Elite', monospace;
+
+  /* Shadows & Elevations */
+  --shadow-ledger: 0 20px 50px rgba(18, 13, 30, 0.85);
+  --shadow-card: 0 10px 25px rgba(22, 16, 38, 0.5);
+  --shadow-gold-glow: 0 0 15px rgba(199, 161, 74, 0.3);
+  
+  /* Borders */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --border-vintage: 2px solid var(--border-gold);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-dark-violet) 0%, var(--bg-mid-violet) 50%, var(--bg-bright-violet) 100%);
+  background-attachment: fixed;
+  color: var(--ledger-paper);
+  font-family: var(--font-body-vintage);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle background grain/texture overlay to heighten the atmospheric feel */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Typography styles */
+h1, h2, h3, h4, .western-title {
+  font-family: var(--font-header-western);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold-highlight);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.sub-header {
+  font-family: var(--font-header-display);
+  font-weight: 600;
+  color: var(--accent-lavender-light);
+  font-style: italic;
+}
+
+/* Container */
+.container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Buttons and Controls */
+.btn-western {
+  background: linear-gradient(180deg, var(--bg-bright-violet) 0%, var(--bg-mid-violet) 100%);
+  color: var(--accent-lavender-light);
+  border: 1px solid var(--border-gold);
+  font-family: var(--font-header-western);
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  letter-spacing: 1.2px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.btn-western:hover {
+  background: linear-gradient(180deg, var(--accent-periwinkle) 0%, var(--bg-bright-violet) 100%);
+  color: #fff;
+  border-color: var(--gold-highlight);
+  box-shadow: var(--shadow-gold-glow);
+  transform: translateY(-2px);
+}
+
+.btn-western.btn-gold {
+  background: linear-gradient(180deg, var(--gold-highlight) 0%, var(--gold-antique) 100%);
+  color: var(--ledger-ink);
+  border: 1px solid #7D6323;
+  font-weight: bold;
+}
+
+.btn-western.btn-gold:hover {
+  background: linear-gradient(180deg, #FFF0BA 0%, var(--gold-highlight) 100%);
+  color: #000;
+  box-shadow: 0 0 20px rgba(232, 208, 139, 0.6);
+}
+
+.btn-western.btn-crimson {
+  background: linear-gradient(180deg, #A83232 0%, var(--stamp-crimson) 100%);
+  color: #fff;
+  border-color: #D96868;
+}
+
+.btn-western.btn-crimson:hover {
+  background: linear-gradient(180deg, #C94C4C 0%, #A83232 100%);
+  box-shadow: 0 0 15px rgba(217, 104, 104, 0.5);
+}
+
+/* Glassmorphism Card Frame */
+.card-frame {
+  background: var(--bg-card-violet);
+  border: 1px solid rgba(184, 169, 223, 0.2);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-frame:hover {
+  border-color: var(--accent-periwinkle);
+  box-shadow: 0 15px 35px rgba(22, 16, 38, 0.7), 0 0 15px rgba(141, 164, 226, 0.2);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stampDown {
+  0% { transform: scale(2) rotate(-8deg); opacity: 0; }
+  60% { transform: scale(0.9) rotate(-3deg); opacity: 1; }
+  100% { transform: scale(1) rotate(-4deg); opacity: 1; }
+}
+
+@keyframes pulseBorder {
+  0%, 100% { border-color: var(--border-gold); }
+  50% { border-color: var(--accent-periwinkle-bright); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
